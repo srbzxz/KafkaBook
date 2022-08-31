@@ -14,10 +14,10 @@ public class KafkaBookApplication {
         ConfigurableApplicationContext context = SpringApplication.run(KafkaBookApplication.class, args);
         KafkaProducer<String, String> producer = context.getBean(KafkaProducer.class);
 
-        ProducerRecord<String, String> record = new ProducerRecord<>("CustomerCountry", "Precision Products", "France");
+        ProducerRecord<String, String> record = new ProducerRecord<>("CustomerCountry", "Biomedical Materials", "USA");
         RecordMetadata recordMetadata = null;
         try {
-            recordMetadata = producer.send(record).get();
+            producer.send(record, new BookProducerCallback());
             System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
